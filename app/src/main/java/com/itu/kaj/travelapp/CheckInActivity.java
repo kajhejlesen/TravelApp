@@ -15,7 +15,7 @@ public class CheckInActivity extends ActionBarActivity {
 
     public static final String TAG_NAME = "Check In Activity";
     public static final String CHECK_IN = "Checking In";
-
+    // useless comment
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

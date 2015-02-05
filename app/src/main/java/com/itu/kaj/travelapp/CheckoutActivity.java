@@ -33,7 +33,6 @@ public class CheckoutActivity extends ActionBarActivity {
                 startActivity(intent);
             }
         });
-
     }
 
 
