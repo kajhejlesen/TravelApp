@@ -4,21 +4,18 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 
-public class ReceiptActivity extends ActionBarActivity {
+
+public class MainActivity extends ActionBarActivity {
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_receipt);
-
-        String checkout = getIntent().getStringExtra(CheckoutActivity.CHECK_OUT);
-        String checkin = getIntent().getStringExtra(CheckInActivity.CHECK_IN);
-
-        TextView view = (TextView) findViewById(R.id.receiptText);
-        view.setText(checkin + ", " + checkout);
+        setContentView(R.layout.activity_main);
 
 
     }
@@ -27,7 +24,7 @@ public class ReceiptActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_receipt, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
