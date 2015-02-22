@@ -7,4 +7,12 @@
     <string name="title_activity_checkout">Check Out Activity</string>
     <string name="title_activity_receipt">Receipt Activity</string>
 
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="check_in_text">Enter Check In Station</string>
+    <string name="select">SELECT</string>
+    <string name="check_out_text">Enter Check Out Station</string>
+    <string name="check_in_button">CHECK IN</string>
+    <string name="check_out_button">CHECK OUT</string>
+
 </resources>
