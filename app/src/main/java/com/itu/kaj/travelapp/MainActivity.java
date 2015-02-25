@@ -19,7 +19,7 @@ public class MainActivity extends Activity implements CheckInFragment.OnFragment
         Fragment fragment = fm.findFragmentById(R.id.mainContainer);
 
         if (fragment == null)
-            fragment = new CheckInFragment();
+            fragment = CheckInFragment.newInstance();
 
         fm.beginTransaction().add(R.id.mainContainer, fragment, CheckInFragment.TAG).commit();
 

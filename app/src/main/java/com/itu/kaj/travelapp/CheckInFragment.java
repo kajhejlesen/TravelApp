@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,12 +75,15 @@ public class CheckInFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_check_in, container, false);
+        Log.i(TAG,"OnCreateView Called");
         return v;
     }
 
     @Override
     public void onViewCreated(View v, Bundle savedInstanceState) {
         super.onViewCreated(v, savedInstanceState);
+        Log.i(TAG,"OnViewCreated Called");
+
 
         checkInText = (EditText) v.findViewById(R.id.check_in_input);
         checkOutText = (EditText) v.findViewById(R.id.check_out_input);
@@ -95,6 +99,31 @@ public class CheckInFragment extends Fragment implements View.OnClickListener {
 
         selectOutButton = (Button) v.findViewById(R.id.selectOutButton);
         selectOutButton.setOnClickListener(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.i(TAG, "on_pause called");
+        Bundle outState = getFragmentManager().findFragmentByTag(TAG).getArguments();
+        outState.putString(LAST_START, startStation);
+        outState.putString(LAST_DESTINATION, endStation);
+        outState.putStringArray(RECEIPT, receipt);
+        outState.putBoolean(CHECK_IN_BUTTON, checkInButton.isEnabled());
+        outState.putBoolean(CHECK_OUT_BUTTON, checkOutButton.isEnabled());
+
+        outState.putBoolean(CHECK_IN_ENABLED, checkInText.isEnabled());
+        outState.putString(CHECK_IN_TEXT, checkInText.getText().toString());
+
+        outState.putBoolean(CHECK_OUT_ENABLED, checkOutText.isEnabled());
+        outState.putString(CHECK_OUT_TEXT, checkOutText.getText().toString());
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
     }
 
     @Override
@@ -148,7 +177,8 @@ public class CheckInFragment extends Fragment implements View.OnClickListener {
                 Bundle bundle = new Bundle();
                 bundle.putInt(StationFragment.INPUT_ID, v.getId());
                 fragment.setArguments(bundle);
-                //transaction.hide(this);
+
+                //transaction.hide(getFragmentManager().findFragmentByTag(TAG));
                 //transaction.show(fragment);
                 transaction.replace(R.id.mainContainer, fragment);
                 transaction.addToBackStack(null);
@@ -163,11 +193,28 @@ public class CheckInFragment extends Fragment implements View.OnClickListener {
         checkInText.setText(station);
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.i(TAG, "onDestroy called");
+    }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.i(TAG, "onDestroyView called");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.i(TAG, "onStop called");
+    }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        Log.i(TAG,"OnActivityCreated Called");
         if (savedInstanceState != null) {
             // Restore last state for checked position.
             startStation = savedInstanceState.getString(LAST_START);
@@ -195,6 +242,7 @@ public class CheckInFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+
     @Override
     public void onDetach() {
         super.onDetach();
@@ -203,6 +251,9 @@ public class CheckInFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
+        Log.i(TAG, "On Save Instance State called");
+        super.onSaveInstanceState(outState);
+
         outState.putString(LAST_START, startStation);
         outState.putString(LAST_DESTINATION, endStation);
         outState.putStringArray(RECEIPT, receipt);
