@@ -23,6 +23,8 @@ import android.widget.Toast;
  * create an instance of this fragment.
  */
 public class CheckInFragment extends Fragment implements View.OnClickListener {
+    public static final String TAG = "check_in_fragmant";
+
     public final String LAST_START = "start";
     public final String LAST_DESTINATION = "destination";
     public final String CHECK_IN_BUTTON = "check_in_button";
@@ -143,6 +145,11 @@ public class CheckInFragment extends Fragment implements View.OnClickListener {
                 if (fragment == null)
                     fragment = StationFragment.newInstance();
 
+                Bundle bundle = new Bundle();
+                bundle.putInt(StationFragment.INPUT_ID, v.getId());
+                fragment.setArguments(bundle);
+                //transaction.hide(this);
+                //transaction.show(fragment);
                 transaction.replace(R.id.mainContainer, fragment);
                 transaction.addToBackStack(null);
 
@@ -151,6 +158,12 @@ public class CheckInFragment extends Fragment implements View.OnClickListener {
                 break;
         }
     }
+
+    public void setStation(String station) {
+        checkInText.setText(station);
+    }
+
+
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -170,9 +183,6 @@ public class CheckInFragment extends Fragment implements View.OnClickListener {
             checkOutText.setText(savedInstanceState.getString(CHECK_OUT_TEXT));
         }
     }
-
-
-
 
     @Override
     public void onAttach(Activity activity) {
@@ -218,7 +228,7 @@ public class CheckInFragment extends Fragment implements View.OnClickListener {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        public void onFragmentInteraction(String id);
+        public void onFragmentInteraction(Uri uri);
     }
 
 }

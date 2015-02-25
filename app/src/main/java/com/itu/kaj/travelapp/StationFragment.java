@@ -1,6 +1,7 @@
 package com.itu.kaj.travelapp;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.ListFragment;
 import android.view.LayoutInflater;
@@ -20,6 +21,9 @@ import com.itu.kaj.travelapp.dummy.DummyContent;
  * interface.
  */
 public class StationFragment extends ListFragment {
+    public static final String INPUT_ID = "input id";
+    private View calledFrom;
+
     public final String[] stations = {
             "København H",
             "VesterPort",
@@ -28,6 +32,7 @@ public class StationFragment extends ListFragment {
             "Nordhavn",
             "SvaneMøllen"
     };
+
 
 
     private OnFragmentInteractionListener mListener;
@@ -87,6 +92,8 @@ public class StationFragment extends ListFragment {
             // fragment is attached to one) that an item has been selected.
             mListener.onFragmentInteraction(DummyContent.ITEMS.get(position).id);
         }*/
+        String value = stations[(int)id];
+        mListener.recieveInput(value);
         getFragmentManager().popBackStack();
     }
 
@@ -102,7 +109,8 @@ public class StationFragment extends ListFragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        public void onFragmentInteraction(String id);
+        public void onFragmentInteraction(Uri uri);
+        public void recieveInput(String id);
     }
 
 }
